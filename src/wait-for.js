@@ -37,13 +37,13 @@ function waitFor(
     },
   },
 ) {
-  if (typeof callback !== 'function') {
+  if (typeof originalCallback !== 'function') {
     throw new TypeError('Received `callback` arg must be a function')
   }
 
   // callback will be replaced by a noop function as soon as it finishes
   // to prevent callback leaking calls
-  let callback = originalCallback;
+  let callback = originalCallback
 
   return new Promise(async (resolve, reject) => {
     let lastError, intervalId, observer
@@ -111,7 +111,7 @@ function waitFor(
 
     function onDone(error, result) {
       finished = true
-      callback = () => {};
+      callback = () => {}
       clearTimeout(overallTimeoutTimer)
 
       if (!usingJestFakeTimers) {
